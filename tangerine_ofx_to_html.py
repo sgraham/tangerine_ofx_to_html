@@ -85,6 +85,7 @@ def AsMoney(value, places=2, curr='$', sep=',', dp='.',
   sign, digits, exp = value.quantize(q).as_tuple()
   result = []
   digits = map(str, digits)
+  digits = list(digits) 
   build, next = result.append, digits.pop
   if sign:
     build(trailneg)
@@ -107,7 +108,7 @@ def AsMoney(value, places=2, curr='$', sep=',', dp='.',
 
 def main(args):
   if len(args) != 2:
-    print 'usage: <username or client id> <password>'
+    print('usage: <username or client id> <password>')
     return 1
 
   username = args[0]
@@ -145,9 +146,9 @@ def main(args):
           balance=AsMoney(statement.balance),
           tablerows='\n'.join(rows)))
       else:
-        print 'ignoring non-BankAccount', account.number
+        print('ignoring non-BankAccount', account.number)
     out.write(HTML_END)
-  print 'Wrote %s.' % filename
+  print('Wrote %s.' % filename)
 
   return 0
 
